@@ -72,6 +72,7 @@ const Common = createGlobalStyle`
     .clearfix {display:block;}
     .blind {position:absolute; left:-99999px; top:-9999999px; font-size:1px;}
     .inner {max-width:1000px; margin:0 auto;}  
+    body {color:#fff; background:#030f03;}
 `;
 
 export default Common;

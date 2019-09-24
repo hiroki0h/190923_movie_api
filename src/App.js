@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // react router에 필요한 거 불러오기
 // 404할때는 Switch 불러오기
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Common from './assets/Common';
@@ -28,7 +29,7 @@ class App extends Component {
 }
 const Content = styled.div`
   width:100%;
-  max-width:960px;
+  max-width:1280px;
   padding:20px;
   margin:0 auto;
 `;
