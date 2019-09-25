@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { moviesApi } from '../Api';
-import { Link } from 'react-router-dom'
-import styled from 'styled-components';
 import Detail from '../components/Detail';
+import Loader from '../components/Loader';
 
 class DetailContainer extends Component { 
   state = {
+    isLoading : false,
     result : {}
   }
   getMovies = async (movieID) => { 
+    const { isLoading } = this.state;
     const result = await moviesApi.movieDetail(movieID);
-    this.setState({ result : result.data });
+    this.setState({ 
+      result : result.data,
+      isLoading : true
+    });
     console.log(result);
     console.log(result.data.id);
   }
@@ -24,15 +28,13 @@ class DetailContainer extends Component {
   }
   render(){
     const { history } = this.props;
-    const { result } = this.state;
-    console.log(result.id);
+    const { isLoading, result } = this.state;
     return(
-      <>
-        <Detail 
-          result={result}
-          history={history}
-        />
-      </>
+      <Detail 
+        isLoading={isLoading}
+        result={result}
+        history={history}
+      />
     )
   }
 }

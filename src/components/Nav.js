@@ -2,21 +2,34 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { menuOpen, pagename } from '../store/modules/INIT';
 
 class Nav extends Component {
+  toNowPlaying = () => {
+    this.props.pagename('nowPlaying');
+    this.props.menuOpen();
+  }
+  toPopular = () => {
+    this.props.pagename('popular');
+    this.props.menuOpen();
+  }
+  toUpComing = () => {
+    this.props.pagename('upComing');
+    this.props.menuOpen();
+  }
   render(){
     return(
     <NAV>
       <ul>
         <li>
        {/* 특정 class 적용해라 -  activeClassName , exact : 정확히 매칭될때만 실행*/}
-          <NavLink exact to="/" activeClassName="active">Now Playing</NavLink>
+          <NavLink exact to="/" activeStyle={activeStyle} onClick={this.toNowPlaying}>Now Playing</NavLink>
         </li>
         <li>
-          <NavLink to="/" activeClassName="active">Popular</NavLink>
+          <NavLink to="/Popular" activeStyle={activeStyle} onClick={this.toPopular}>Popular</NavLink>
         </li>
         <li>
-          <NavLink to="/" activeClassName="active">Up Coming</NavLink>
+          <NavLink to="/UpComing" activeStyle={activeStyle} onClick={this.toUpComing}>Up Coming</NavLink>
         </li>
       </ul>
     </NAV>
@@ -59,6 +72,16 @@ const NAV = styled.nav`
     }
   }
 `;
-export default Nav;
+const activeStyle = {
+  borderBottom:"1px solid #fff"
+};
+const mapStateToProps = ({ INIT }) => ({
+  openMenu : INIT.openMenu
+});
+const mapDispatchToProps = { menuOpen, pagename };
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav);
 // https://reactjsexample.com/tag/scroll/
 // https://reactjsexample.com/scroll-to-a-position-in-react/
