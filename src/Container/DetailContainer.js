@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { moviesApi } from '../Api';
 import Detail from '../components/Detail';
-import Loader from '../components/Loader';
 
 class DetailContainer extends Component { 
   state = {

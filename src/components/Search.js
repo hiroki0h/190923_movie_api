@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Loader from './Loader';
 import SearchIcon from "../assets/images/search_icon.png";
 import ListTheme from '../assets/ListTheme';
+import NoPoster from "../assets/images/noPoster.png";
 
 class Search extends Component { 
   render(){
@@ -36,7 +37,10 @@ class Search extends Component {
                 <li key={index}>
                   <Link to={`detail/${list.id}`}>
                     <div className="img_box">
-                      <img src={`https://image.tmdb.org/t/p/w500${list.poster_path}`} alt={searchResult.original_title}/>
+                      {list.poster_path === null
+                        ?<img src={NoPoster} alt="" className="no_poster"/>
+                        :<img src={`https://image.tmdb.org/t/p/w500${list.poster_path}`} alt={searchResult.original_title}/>
+                      }
                     </div>
                     <div className="text_box">
                       <Dotdotdot clamp={3}>
@@ -75,7 +79,7 @@ position:relative;
     font-size:0;
     position:absolute;
     right:0;
-    top:10px;
+    top:0;
       ::before {
         content:"";
         width:35px;

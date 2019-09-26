@@ -29,6 +29,7 @@ ul.list {
       height:0;
       overflow:hidden;
       padding-bottom:150%;
+      text-align:center;
       position:relative;
       ::before {
         content:""; 
@@ -45,6 +46,10 @@ ul.list {
       img {
         transform: scale(1);
         transition:all .5s ease-out;
+      }
+      .no_poster {
+        width:50%;
+        margin-top:30%;
       }
     }
     .text_box {
@@ -66,6 +71,30 @@ ul.list {
       }
     }
   }
+}
+@media (max-width:960px ){
+  ul.list {
+    li {
+      width:50%;
+    }
+  }
+
+}
+@media (max-width:768px ){
+  ul.list {
+    li {
+      :hover .img_box img{
+        transform:scale(1);
+      }
+      :hover .img_box::before {
+        opacity:0;
+      }
+      :hover .text_box {
+        opacity:0;
+      }
+    }
+  }
+  .video_box {display:none;}
 }
 `;
 export default ListTheme;

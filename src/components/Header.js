@@ -1,22 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { menuOpen } from '../store/modules/INIT';
+import { menuOpen, pagename, searchOpen } from '../store/modules/INIT';
 import styled from 'styled-components';
 import Nav from './Nav'
 import SearchIcon from "../assets/images/search_icon.png";
 
 class Header extends Component {
+  toNowPlaying = () => {
+    this.props.pagename('nowPlaying');
+  }
   menuOpen = () => {
     this.props.menuOpen();
   }
+  searchOpen = () => {
+    this.props.searchOpen();
+  }
   render(){
     const { openMenu } = this.props;
+    console.log(openMenu);
     return(
     <HeaderBox >
       <HeaderBoxInner>
-        <HeaderLink to="/">MOVIES</HeaderLink>
-        <SearchLink to="/search" className="search">Search</SearchLink>
+        <HeaderLink to="/" onClick={this.toNowPlaying}>MOVIES</HeaderLink>
+        <SearchLink to="/search" className="search" onClick={this.searchOpen}>Search</SearchLink>
         <Button 
           type="button" 
           className="menu" 
@@ -126,7 +133,7 @@ const Button = styled.button`
 const mapStateToProps = ({ INIT }) => ({
   openMenu : INIT.openMenu
 });
-const mapDispatchToProps = { menuOpen };
+const mapDispatchToProps = { menuOpen, pagename, searchOpen };
 export default connect(
   mapStateToProps,
   mapDispatchToProps

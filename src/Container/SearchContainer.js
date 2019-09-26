@@ -8,16 +8,19 @@ class SearchContainer extends Component {
     searchValue : "",
     searchResult : []
   }
+  // 2
   submitOnSubmit = (e) => {
     e.preventDefault();
     this.searchResult();
   };
+  // 1
   valueChange = (e) => {
     console.log( e.target.value );
     this.setState({
       searchValue : e.target.value
     })    
   };
+  // 3
   searchResult = async () => { 
     // 검색 받아
     const { searchResult, searchValue } = this.state;

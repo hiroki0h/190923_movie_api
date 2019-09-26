@@ -3,18 +3,14 @@ import React, { Component } from 'react';
 // 404할때는 Switch 불러오기
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
 import Common from './assets/Common';
 import Header from './components/Header'
-import Popular from './components/Popular'
-import UpComing from './components/UpComing'
 import HomeContainer from './Container/HomeContainer'
 import SearchContainer from './Container/SearchContainer'
 import DetailContainer from './Container/DetailContainer'
 import Notfound from './components/Notfound';
 // import { Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import { animateScroll as scroll } from 'react-scroll'
-
 
 const topBtnPosition = (window.innerWidth - 1350) / 2;
 class App extends Component {
@@ -23,7 +19,7 @@ class App extends Component {
   }
   // topBtnPosition = () => {
   //   if(window.innerWidth >= 1280){
-  //     return (window.innerWidth - 1200) / 2;
+  //     return (window.innerWidth - 1350) / 2;
   //   }else{
   //       return 10;
   //   }
@@ -32,10 +28,11 @@ class App extends Component {
     console.log(topBtnPosition);
     return (
     <Router>
+      {/* reset css 추가 */}
       <Common/>
       <Header/>
-      <TopBtn className="top" style={{
-        right:topBtnPosition}}>
+      <TopBtn className="top" 
+        style={{right:topBtnPosition}}>
         <button onClick={this.toTop}>TOP</button>
       </TopBtn>
       <Content>
@@ -43,11 +40,14 @@ class App extends Component {
         <Switch>
           {/* path - 특정위치에 도달하면 컴포넌트 보여줘라 */}
           <Route exact path="/" component={HomeContainer}/>
-          <Route exact path="/Popular" component={Popular}/>
-          <Route exact path="/UpComing" component={UpComing}/>
+          <Route exact path="/nowPlaying" component={HomeContainer}/>
+          <Route exact path="/Popular" component={HomeContainer}/>
+          <Route exact path="/UpComing" component={HomeContainer}/>
           <Route path="/search" component={SearchContainer}/>
-          <Route path="/search:searchValue" component={SearchContainer}/>
+          {/* url 파라미터 넘겨주기 */}
           <Route path="/detail/:id" component={DetailContainer}/>
+          {/* Switch가 써지면 매칭하고 나머지는 비교하지 않아 */}
+          {/* Route의 path를 다 비교 했는데 일치하는게 없으면 Notfound */}
           <Route component={Notfound}/>
         </Switch>
       </Content>
@@ -58,13 +58,12 @@ class App extends Component {
 const Content = styled.div`
   width:100%;
   max-width:1280px;
-  padding:20px;
-  padding-top:50px;
+  padding:100px 20px 100px;
   margin:0 auto;
 `;
 const TopBtn = styled.div`
   position:fixed;
-  top:80px;
+  bottom:50px;
   right:30px;
   z-index:999;
   button {

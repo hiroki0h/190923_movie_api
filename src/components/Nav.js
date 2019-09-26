@@ -20,16 +20,16 @@ class Nav extends Component {
   render(){
     return(
     <NAV>
-      <ul>
+      <ul className="depth1">
         <li>
-       {/* 특정 class 적용해라 -  activeClassName , exact : 정확히 매칭될때만 실행*/}
-          <NavLink exact to="/" activeStyle={activeStyle} onClick={this.toNowPlaying}>Now Playing</NavLink>
+       {/* 특정 NavLink 적용해라 -  activeStyle , exact : 정확히 매칭될때만 실행*/}
+          <NavLink exact to="/" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toNowPlaying}>Now Playing</NavLink>
         </li>
         <li>
-          <NavLink to="/Popular" activeStyle={activeStyle} onClick={this.toPopular}>Popular</NavLink>
+          <NavLink to="/Popular" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toPopular}>Popular</NavLink>
         </li>
         <li>
-          <NavLink to="/UpComing" activeStyle={activeStyle} onClick={this.toUpComing}>Up Coming</NavLink>
+          <NavLink to="/UpComing" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toUpComing}>Up Coming</NavLink>
         </li>
       </ul>
     </NAV>
@@ -43,7 +43,7 @@ const NAV = styled.nav`
   position:fixed;
   left:0;
   z-index:9;
-  ul {
+  .depth1 {
     width:50%;
     padding-top:50px;
     transform:translateX(-50%);
@@ -61,10 +61,24 @@ const NAV = styled.nav`
         font-size:40px;
         display:block;
       }
+      button {
+        width:100%;
+        line-height:77px;
+        border-bottom:1px solid transparent;
+        color:#aaa;
+        font-weight:bold;
+        font-size:40px;
+        display:block;
+      }
       .active {
-        /* border-bottom:1px solid #fff; */
+        border-bottom:1px solid #fff;
       }
       :hover a {
+        color:#fff;
+        border-bottom:1px solid #fff;
+        transition:all .8s ease-out;
+      }
+      :hover button {
         color:#fff;
         border-bottom:1px solid #fff;
         transition:all .8s ease-out;
@@ -72,9 +86,6 @@ const NAV = styled.nav`
     }
   }
 `;
-const activeStyle = {
-  borderBottom:"1px solid #fff"
-};
 const mapStateToProps = ({ INIT }) => ({
   openMenu : INIT.openMenu
 });

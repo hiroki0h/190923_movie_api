@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-
+// v4부터 injectGlobal 가 createGlobalStyle로 변경
 const Common = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap');
     html, body, div, span, object, iframe,
@@ -25,6 +25,7 @@ const Common = createGlobalStyle`
     body {
         font:13px/1.4 'Shadows Into Light', cursive;
         color:#333;
+        letter-spacing:1.5px;
     }
     
     input, select, button, textarea{
