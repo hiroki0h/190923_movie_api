@@ -36,6 +36,7 @@ ul.list {
         width:100%;
         height:100%; 
         background:url(${ListBg}) repeat-x 0 0;
+        background-size:contain;
         position:absolute; 
         top:0; 
         left:0;

@@ -18,6 +18,7 @@ export const startEndPage = createAction(START_END_PAGE,(start,end) => ({start,e
 // 초기값
 const initalState = {
     current: 1,
+    firstPage: 1,
     start: 0,
     end: 5, // Pagination 관련
     openMenu : true,

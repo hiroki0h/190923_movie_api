@@ -41,8 +41,8 @@ class App extends Component {
           {/* path - 특정위치에 도달하면 컴포넌트 보여줘라 */}
           <Route exact path="/" component={HomeContainer}/>
           <Route exact path="/nowPlaying" component={HomeContainer}/>
-          <Route exact path="/Popular" component={HomeContainer}/>
-          <Route exact path="/UpComing" component={HomeContainer}/>
+          <Route exact path="/popular" component={HomeContainer}/>
+          <Route exact path="/upcoming" component={HomeContainer}/>
           <Route path="/search" component={SearchContainer}/>
           {/* url 파라미터 넘겨주기 */}
           <Route path="/detail/:id" component={DetailContainer}/>

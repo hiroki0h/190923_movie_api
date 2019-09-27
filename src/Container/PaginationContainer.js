@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import Pagination from '../components/Pagination';
 import { currentPage, startEndPage } from '../store/modules/INIT';
 class PaginationContainer extends Component { 
-  firstPage = () => {
-    console.log('firstPage');
-  }
   prevPage = () => {
     console.log('prevPage');
   }
@@ -16,12 +13,13 @@ class PaginationContainer extends Component {
     console.log('lastPage');
   }
   render(){
-    const { isLoading, nowPlaying, popular, upComing } = this.props;
-    console.log(nowPlaying);
-    console.log(popular);
+    // const { isLoading, nowPlaying, popular, upComing } = this.props;
+    const {  upcoming } = this.props;
+    // console.log(this.props.firstPage);
     return(
       <Pagination
-      firstPage={this.firstPage}
+      firstPage={this.props.firstPage}
+      upcoming={this.upcoming}
       prevPage={this.prevPage}
       nextPage={this.nextPage}
       lastPage={this.lastPage}
@@ -33,6 +31,7 @@ class PaginationContainer extends Component {
 // 함수 클릭 만들기 
 // 페이지 토큰 1~10; 11~20
 const mapStateToProps = ({ INIT }) => ({
+  firstPage : INIT.firstPage,
   start : INIT.start,
   end : INIT.end
 });

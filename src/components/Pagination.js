@@ -1,24 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'
 
-const Pagination = ({ firstPage, prevPage, nextPage, lastPage }) => {
+const Pagination = ({ firstPage, upComing, prevPage, nextPage, lastPage }) => {
   return (
     <PaginationBox>
       <ul className="clearfix">
         <li>
-          <button type="button" onClick={firstPage}>first page</button>
+          <Link to={`/${firstPage}`} title="first page">&#60;&#60;</Link>
         </li>
         <li>
-          <button type="button" onClick={prevPage}>prev page</button>
+          <Link to="" onClick={prevPage} title="prev page">&#60;</Link>
         </li>
         <li>
-          <button type="button">1</button>
+          <Link to="">1</Link>
         </li>
         <li>
-          <button type="button" onClick={nextPage}>next page</button>
+          <Link to="" onClick={nextPage} title="next page">&#62;</Link>
         </li>
         <li>
-          <button type="button" onClick={lastPage}>last page</button>
+          <Link to="" onClick={lastPage} title="last page">&#62;&#62;</Link>
         </li>
       </ul>
     </PaginationBox>
@@ -34,9 +35,9 @@ text-align:center;
 ul {
   display:inline-block;
   li {
-    padding:0 20px;
     float:left;
-    button {
+    a {
+      padding:0 20px;
       color:#fff;
     }
   }

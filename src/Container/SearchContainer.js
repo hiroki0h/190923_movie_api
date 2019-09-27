@@ -27,7 +27,7 @@ class SearchContainer extends Component {
     const {data: { results: result }} = await moviesApi.search(searchValue);
     this.setState({
       searchResult : [...result],
-      isLoading: true 
+      isLoading: false 
     });
     console.log(result);
     console.log(searchResult);

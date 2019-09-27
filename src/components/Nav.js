@@ -14,7 +14,7 @@ class Nav extends Component {
     this.props.menuOpen();
   }
   toUpComing = () => {
-    this.props.pagename('upComing');
+    this.props.pagename('upcoming');
     this.props.menuOpen();
   }
   render(){
@@ -23,13 +23,13 @@ class Nav extends Component {
       <ul className="depth1">
         <li>
        {/* 특정 NavLink 적용해라 -  activeStyle , exact : 정확히 매칭될때만 실행*/}
-          <NavLink exact to="/" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toNowPlaying}>Now Playing</NavLink>
+          <NavLink exact to="/nowPlaying" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toNowPlaying}>Now Playing</NavLink>
         </li>
         <li>
           <NavLink to="/Popular" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toPopular}>Popular</NavLink>
         </li>
         <li>
-          <NavLink to="/UpComing" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toUpComing}>Up Coming</NavLink>
+          <NavLink to="/upcoming" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toUpComing}>Up Coming</NavLink>
         </li>
       </ul>
     </NAV>
