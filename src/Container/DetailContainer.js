@@ -34,6 +34,10 @@ class DetailContainer extends Component {
         result={result}
         history={history}
       />
+      // <PaginationContainer
+      //   isLoading={isLoading}
+      //   moviesResult={moviesResult}
+      // />
     )
   }
 }

@@ -8,7 +8,7 @@ import SearchIcon from "../assets/images/search_icon.png";
 
 class Header extends Component {
   toNowPlaying = () => {
-    this.props.pagename('nowPlaying');
+    this.props.pagename('home');
   }
   menuOpen = () => {
     this.props.menuOpen();

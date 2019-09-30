@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Common from './assets/Common';
 import Header from './components/Header'
 import HomeContainer from './Container/HomeContainer'
+import PageContainer from './Container/PageContainer'
 import SearchContainer from './Container/SearchContainer'
 import DetailContainer from './Container/DetailContainer'
 import Notfound from './components/Notfound';
@@ -40,7 +41,7 @@ class App extends Component {
         <Switch>
           {/* path - 특정위치에 도달하면 컴포넌트 보여줘라 */}
           <Route exact path="/" component={HomeContainer}/>
-          <Route exact path="/nowPlaying" component={HomeContainer}/>
+          <Route exact path="/now_playing" component={HomeContainer}/>
           <Route exact path="/popular" component={HomeContainer}/>
           <Route exact path="/upcoming" component={HomeContainer}/>
           <Route path="/search" component={SearchContainer}/>

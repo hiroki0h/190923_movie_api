@@ -1,10 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 import ListBg from "../assets/images/list_bg_V.png";
 const ListTheme = createGlobalStyle`
-ul.list {
+.list {
   padding-top:20px;
   margin-right:-20px;
-  li {
+  .movies_list ,li {
     width:25%;
     padding-right:20px;
     margin-bottom:20px;

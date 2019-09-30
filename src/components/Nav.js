@@ -6,7 +6,7 @@ import { menuOpen, pagename } from '../store/modules/INIT';
 
 class Nav extends Component {
   toNowPlaying = () => {
-    this.props.pagename('nowPlaying');
+    this.props.pagename('now_playing');
     this.props.menuOpen();
   }
   toPopular = () => {
@@ -23,7 +23,7 @@ class Nav extends Component {
       <ul className="depth1">
         <li>
        {/* 특정 NavLink 적용해라 -  activeStyle , exact : 정확히 매칭될때만 실행*/}
-          <NavLink exact to="/nowPlaying" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toNowPlaying}>Now Playing</NavLink>
+          <NavLink exact to="/now_playing" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toNowPlaying}>Now Playing</NavLink>
         </li>
         <li>
           <NavLink to="/Popular" activeStyle={{borderBottom:"1px solid #fff", color:"#fff"}} onClick={this.toPopular}>Popular</NavLink>

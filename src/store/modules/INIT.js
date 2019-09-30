@@ -22,7 +22,7 @@ const initalState = {
     start: 0,
     end: 5, // Pagination 관련
     openMenu : true,
-    pagename : 'nowPlaying',
+    pagename : 'home',
     screenWidth : 0,
     screenHeight : 0
 };

@@ -8,25 +8,25 @@ const api = axios.create({ // api 값 받기
   }
 });
 export const moviesApi = {
-  movieList : (page) => api.get('movie/now_playing',{
+  movieList : (page, pagename) => api.get(`movie/${pagename}`,{
     params : {page : page}
   }),
-  // nowPlaying : (page) => {
-  //   console.log(page);
-  //     return(
-  //       api.get('movie/now_playing',{
-  //         params : {page : page}
-  //         // 페이지 별로 데이터 받아온당
-  //       })
-  //     );
-  //   },
-  // // 페이지 별로 데이터 받아온당
-  // upComing : (page) => api.get('movie/upcoming',{
-  //     params : {page : page}
-  // }),
-  // popular : (page) => api.get('movie/popular',{
-  //     params : {page : page}
-  // }),
+  nowPlaying : (page) => {
+    console.log(page);
+      return(
+        api.get('movie/now_playing',{
+          params : {page : page}
+          // 페이지 별로 데이터 받아온당;
+        })
+      );
+    },
+  // 페이지 별로 데이터 받아온당
+  upComing : (page) => api.get('movie/upcoming',{
+      params : {page : page}
+  }),
+  popular : (page) => api.get('movie/popular',{
+      params : {page : page}
+  }),
   movieDetail : id =>
     api.get(`movie/${id}`, {
       params : {
