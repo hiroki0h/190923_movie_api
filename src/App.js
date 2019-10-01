@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 // react router에 필요한 거 불러오기
 // 404할때는 Switch 불러오기
 import styled from 'styled-components';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Common from './assets/Common';
 import Header from './components/Header'
 import HomeContainer from './Container/HomeContainer'
-import PageContainer from './Container/PageContainer'
 import SearchContainer from './Container/SearchContainer'
 import DetailContainer from './Container/DetailContainer'
 import Notfound from './components/Notfound';
@@ -26,6 +26,7 @@ class App extends Component {
   //   }
   // };
   render(){
+    const { pagename } = this.props;
     console.log(topBtnPosition);
     return (
     <Router>
@@ -41,9 +42,12 @@ class App extends Component {
         <Switch>
           {/* path - 특정위치에 도달하면 컴포넌트 보여줘라 */}
           <Route exact path="/" component={HomeContainer}/>
-          <Route exact path="/now_playing" component={HomeContainer}/>
-          <Route exact path="/popular" component={HomeContainer}/>
-          <Route exact path="/upcoming" component={HomeContainer}/>
+          {/* <Redirect from="/now_playing" to="/now_playing/1"/>
+          <Redirect from="/popular" to="/popular/1"/>
+          <Redirect from="/upcoming" to="/upcoming/1"/> */}
+          <Route path="/now_playing/:page" component={HomeContainer} pagename={'now_playing'}/>
+          <Route path="/popular/:page" component={HomeContainer} pagename={'popular'}/>
+          <Route path="/upcoming/:page" component={HomeContainer} pagename={'upcoming'}/>
           <Route path="/search" component={SearchContainer}/>
           {/* url 파라미터 넘겨주기 */}
           <Route path="/detail/:id" component={DetailContainer}/>
@@ -71,4 +75,11 @@ const TopBtn = styled.div`
     color:#ffff;
   }
 `;
-export default App;
+const mapStateToProps = ({ INIT }) => ({
+  pagename : INIT.pagename
+});
+const mapDispatchToProps = { };
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

@@ -33,10 +33,11 @@ export const moviesApi = {
         append_to_response: 'videos'
       }
     }),
-  search : term =>
+  search : (term,page) =>
     api.get('search/movie', {
       params : {
-        query : encodeURIComponent(term)
+        query : encodeURIComponent(term),
+        page: page
       }
     })
 };

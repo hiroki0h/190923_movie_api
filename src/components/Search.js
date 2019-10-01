@@ -7,11 +7,13 @@ import Loader from './Loader';
 import SearchIcon from "../assets/images/search_icon.png";
 import ListTheme from '../assets/ListTheme';
 import NoPoster from "../assets/images/noPoster.png";
+import PaginationContainer from '../Container/PaginationContainer';
 
 class Search extends Component { 
   render(){
-    const { match, isLoading, submitOnSubmit, searchValue, valueChange, searchResult } = this.props;
+    const { match, isLoading, submitOnSubmit, searchValue, valueChange, searchResult, totalPages, current } = this.props;
     console.log('searchResult'+searchResult.length);
+    const category = match.url.split('/')[1];
     return(
       <>
       {match.params.searchValue}
@@ -32,8 +34,8 @@ class Search extends Component {
           {searchResult.length === 0
           ?
           <>
-            <p>Sorry, no results were found</p>
-            <p>Make sure all words are spelled correctly or try using different keywords.</p>
+            {/* <p>Sorry, no results were found</p>
+            <p>Make sure all words are spelled correctly or try using different keywords.</p> */}
           </>
           :
           <>
@@ -62,6 +64,11 @@ class Search extends Component {
                   </li>
                 ))}
             </ul>
+            <PaginationContainer
+              totalPages={totalPages}
+              current={current}
+              category={category}
+            />
           </>
           }
         </Results>

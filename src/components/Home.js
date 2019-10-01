@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-import { menuOpen, searchOpen } from '../store/modules/INIT';
+import { pagename } from '../store/modules/INIT';
 import Dotdotdot from 'react-dotdotdot';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import NoPoster from "../assets/images/noPoster.png";
 
 class Home extends Component {
+  selectThisPage = () => {
+    const { pagename, name } = this.props;
+    pagename(name);
+  }
   render(){
-    const { pagename, openMenu, nowPlaying, popular, upcoming } = this.props;
+    const { name, title, selectName } = this.props;
     const settings = {
       className: "center",
       centerMode: true,
@@ -18,14 +22,13 @@ class Home extends Component {
       slidesToShow: 3,
       speed: 500
     };
-    console.log(openMenu);
     return(
       <>
-      <div>
-        <h2><Link to={`/${popular}`}>{popular}</Link></h2>
+      <MovieBox>
+        <h2><Link to={`/${name}/1`} onClick={this.selectThisPage}>{title}</Link></h2>
         <SliderList className="list clearfix">
           <Slider {...settings}>
-              {popular.map(item => (
+              {selectName.map(item => (
                 <div key={item.id} className="movies_list">
                   <Link to={`detail/${item.id}`}>
                     <div className="img_box">
@@ -38,8 +41,7 @@ class Home extends Component {
                       <Dotdotdot clamp={3}>
                           <p className="title">{item.title}</p>
                       </Dotdotdot>
-                      <Dotd
-                      .01otdot clamp={6}>
+                      <Dotdotdot clamp={6}>
                           <p className="overview">{item.overview}</p>
                       </Dotdotdot>
                     </div>
@@ -48,19 +50,33 @@ class Home extends Component {
               ))}
             </Slider>
           </SliderList>
-        </div>
+        </MovieBox>
       </>
     )
   }
 }
+const MovieBox = styled.div`
+  padding-top:30px;
+  :first-child {padding-top:0;}
+`;
 const SliderList = styled.div`
-button {color:#fff;}
+  margin-right:0;
+  position:relative;
+  button {color:#fff;}
+  .slick-list {padding-bottom:30px !important;}
+  .slick-arrow {
+    font-size:20px;
+    position:absolute;
+    bottom:0;
+    z-index:7;
+  }
+  .slick-prev {left:0;}
+  .slick-next {right:0;}
 `;
 const mapStateToProps = ({ INIT }) => ({
-  pagename : INIT.pagename,
   openMenu : INIT.openMenu
 });
-const mapDispatchToProps = { menuOpen, searchOpen };
+const mapDispatchToProps = { pagename };
 export default connect(
   mapStateToProps,
   mapDispatchToProps

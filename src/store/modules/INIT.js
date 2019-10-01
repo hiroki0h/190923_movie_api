@@ -12,12 +12,13 @@ export const menuOpen = createAction(MENU_OPEN, openMenu => openMenu);
 export const searchOpen = createAction(SEARCH_OPEN, openMenu => openMenu);
 export const resize = createAction(RESIZE);
 export const pagename = createAction(PAGE_NAME, pagename => pagename);
-export const currentPage = createAction(CURRENT_PAGE, pagename => pagename);
+export const currentPage = createAction(CURRENT_PAGE, num => num);
 export const startEndPage = createAction(START_END_PAGE,(start,end) => ({start,end}));
+
 
 // 초기값
 const initalState = {
-    current: 1,
+    current: 2,
     firstPage: 1,
     start: 0,
     end: 5, // Pagination 관련
@@ -42,6 +43,7 @@ export default handleActions(
         }),
         [CURRENT_PAGE] : (state, action) => ({
             ...state,
+            current : action.payload
         }),
         [START_END_PAGE] : (state, action) => ({
             ...state,

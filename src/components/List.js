@@ -5,28 +5,21 @@ import { menuOpen, searchOpen } from '../store/modules/INIT';
 import Dotdotdot from 'react-dotdotdot';
 import styled from 'styled-components';
 import NoPoster from "../assets/images/noPoster.png";
-import PaginationContainer from '../Container/PaginationContainer';
 
 class List extends Component {
   render(){
     const { pagename, openMenu, moviesResult } = this.props;
-    const settings = {
-      className: "center",
-      centerMode: true,
-      infinite: true,
-      centerPadding: "100px",
-      slidesToShow: 3,
-      speed: 500
-    };
-    console.log(openMenu);
+    console.log(moviesResult);
+    console.log(pagename);
     return(
       <>
         <div>
-          <h2><Link to={`/${pagename}`}>{pagename}</Link></h2>1111111111111
+          <h2>{pagename}</h2>
             <div className="list clearfix">
               {moviesResult.map(item => (
                 <div key={item.id} className="movies_list">
-                  <Link to={`detail/${item.id}`}>
+                  {/* 절대경로로 적어주어야 한다구 */}
+                  <Link to={`/detail/${item.id}`}>
                     <div className="img_box">
                       {item.poster_path === null
                         ?<img src={NoPoster} alt="" className="no_poster"/>
@@ -45,15 +38,11 @@ class List extends Component {
                 </div>
               ))}
             </div>
-            {/* <PaginationContainer/> */}
         </div>
       </>
     )
   }
 }
-const SliderList = styled.div`
-button {color:#fff;}
-`;
 const mapStateToProps = ({ INIT }) => ({
   pagename : INIT.pagename,
   openMenu : INIT.openMenu

@@ -1,18 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'
 
 const MainBtnTheme = ({ history }) =>{
     return(
         <BackButton>
             {/* 버튼이 클릭되면 메인 가즈아 */}  
-            <button type="button" onClick={()=>{history.push('/')}}>MAIN</button>
+            {/* <button type="button" onClick={()=>{history.push('/')}}>MAIN</button> */}
+            <Link to={"/"}>MAIN</Link>
         </BackButton>
     )
 };
 const BackButton = styled.div`
   margin-top:20px;
   text-align:center;
-  button {
+  a {
     padding:10px 30px;
     border:1px solid #fff;
     border-radius:3px;

@@ -12,14 +12,23 @@ class PaginationContainer extends Component {
   lastPage = () => {
     console.log('lastPage');
   }
+  pageUpdate = (num) => {
+    this.props.currentPage(num)
+    console.log('lastPage');
+  }
   render(){
-    // const { isLoading, nowPlaying, popular, upComing } = this.props;
-    const {  upcoming } = this.props;
-    // console.log(this.props.firstPage);
+    const { totalPages, start, end, category } = this.props;
+    const pageArray = [];
+    for (let i = 0; i < totalPages; i++){
+      pageArray.push(i + 1);
+    }
+    const target = pageArray.slice(start, end);
+    console.log(target);
     return(
       <Pagination
+      target={target}
+      category={category}
       firstPage={this.props.firstPage}
-      upcoming={this.upcoming}
       prevPage={this.prevPage}
       nextPage={this.nextPage}
       lastPage={this.lastPage}
