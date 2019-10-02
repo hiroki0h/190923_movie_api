@@ -13,17 +13,19 @@ export const searchOpen = createAction(SEARCH_OPEN, openMenu => openMenu);
 export const resize = createAction(RESIZE);
 export const pagename = createAction(PAGE_NAME, pagename => pagename);
 export const currentPage = createAction(CURRENT_PAGE, num => num);
-export const startEndPage = createAction(START_END_PAGE,(start,end) => ({start,end}));
+export const startEndPage = createAction(START_END_PAGE, num => num);
 
 
 // 초기값
 const initalState = {
-    current: 2,
+    current: 1,
     firstPage: 1,
+    lastPage: 0,
     start: 0,
     end: 5, // Pagination 관련
     openMenu : true,
-    pagename : 'home',
+    accordian : false,
+    pagename : '',
     screenWidth : 0,
     screenHeight : 0
 };
@@ -47,6 +49,7 @@ export default handleActions(
         }),
         [START_END_PAGE] : (state, action) => ({
             ...state,
+            start : action.payload
         })
     }, initalState
 );

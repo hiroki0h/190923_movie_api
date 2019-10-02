@@ -12,7 +12,7 @@ export const moviesApi = {
     params : {page : page}
   }),
   nowPlaying : (page) => {
-    console.log(page);
+    console.log('page - '+page);
       return(
         api.get('movie/now_playing',{
           params : {page : page}
@@ -39,5 +39,14 @@ export const moviesApi = {
         query : encodeURIComponent(term),
         page: page
       }
-    })
+    }),
+  genresList : () => api.get('genre/movie/list',{
+  }),
+  genresMovie : (genresId) => api.get(`discover/movie/`,{
+    params : {
+      with_genres : encodeURIComponent(genresId)
+    }
+  }),
 };
+// https://api.themoviedb.org/3/discover/movie?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&  with_genres=16
+// https://api.themoviedb.org/3/search/movie?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&    query=asd

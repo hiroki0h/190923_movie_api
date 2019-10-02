@@ -3,23 +3,21 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import { menuOpen, searchOpen } from '../store/modules/INIT';
 import Dotdotdot from 'react-dotdotdot';
-import styled from 'styled-components';
 import NoPoster from "../assets/images/noPoster.png";
 
 class List extends Component {
   render(){
-    const { pagename, openMenu, moviesResult } = this.props;
-    console.log(moviesResult);
-    console.log(pagename);
+    const { title, openMenu, moviesResult } = this.props;
+    // console.log(moviesResult);
+    // console.log(pagename);
     return(
       <>
         <div>
-          <h2>{pagename}</h2>
+          <h2>{title}</h2>
             <div className="list clearfix">
               {moviesResult.map(item => (
                 <div key={item.id} className="movies_list">
-                  {/* 절대경로로 적어주어야 한다구 */}
-                  <Link to={`/detail/${item.id}`}>
+                  <Link to={`/detail/${item.id}`}> {/* 절대경로로 적어주어야 한다구 */}
                     <div className="img_box">
                       {item.poster_path === null
                         ?<img src={NoPoster} alt="" className="no_poster"/>
@@ -44,7 +42,6 @@ class List extends Component {
   }
 }
 const mapStateToProps = ({ INIT }) => ({
-  pagename : INIT.pagename,
   openMenu : INIT.openMenu
 });
 const mapDispatchToProps = { menuOpen, searchOpen };

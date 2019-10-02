@@ -8,7 +8,6 @@ class DetailContainer extends Component {
     result : {}
   }
   getMovies = async (movieID) => { 
-    const { isLoading } = this.state;
     const result = await moviesApi.movieDetail(movieID);
     this.setState({ 
       result : result.data,

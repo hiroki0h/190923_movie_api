@@ -66,9 +66,12 @@ const SliderList = styled.div`
   .slick-list {padding-bottom:30px !important;}
   .slick-arrow {
     font-size:20px;
+    color:#aaa;
     position:absolute;
     bottom:0;
     z-index:7;
+    transition:all .5s ease-out;
+  :hover {color:#fff;}
   }
   .slick-prev {left:0;}
   .slick-next {right:0;}

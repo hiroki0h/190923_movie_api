@@ -2,26 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
-const Pagination = ({ category, target, pageUpdate, firstPage, prevPage, nextPage, lastPage }) => {
+const Pagination = ({ getPageList, category, target, firstPage, prevPage, nextPage, lastPage }) => {
   return (
     <PaginationBox>
       <ul className="clearfix">
         <li>
-          <Link to={`/${category}/${firstPage}`} title="first page">&#60;&#60;</Link>
+          <Link to={`/${category}/${firstPage}`} onClick={getPageList} title="first page">&#60;&#60;</Link>
         </li>
         <li>
-          <Link to={`/${category}/${firstPage}`} title="prev page">&#60;</Link>
+          <Link to={`/${category}/${firstPage}`} onClick={getPageList} title="prev page">&#60;</Link>
         </li>
           {target.map(item => (
             <li key={item}>
-              <Link to={`/${category}/${item}`} title={`${item}`}>{item}</Link>
+              <Link to={`/${category}/${item}`} title={`${item} page`}>{item}</Link>
             </li>
           ))}
         <li>
-          <Link to={`/${category}/${firstPage}`}title="next page">&#62;</Link>
+          <Link to={`/${category}/${firstPage}`} onClick={getPageList} title="next page">&#62;</Link>
         </li>
         <li>
-          <Link to={`/${category}/5`} title="last page">&#62;&#62;</Link>
+          <Link to={`/${category}/${lastPage}`} onClick={getPageList} title="last page">&#62;&#62;</Link>
         </li>
       </ul>
     </PaginationBox>

@@ -3,38 +3,37 @@ import React, { Component } from 'react';
 // 404할때는 Switch 불러오기
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
 import Common from './assets/Common';
 import Header from './components/Header'
 import HomeContainer from './Container/HomeContainer'
+import PageContainer from './Container/PageContainer'
+import SeachGenreContainer from './Container/SeachGenreContainer'
 import SearchContainer from './Container/SearchContainer'
 import DetailContainer from './Container/DetailContainer'
 import Notfound from './components/Notfound';
 // import { Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 import { animateScroll as scroll } from 'react-scroll'
 
-const topBtnPosition = (window.innerWidth - 1350) / 2;
+const topBtnPosition = () => {
+  if(window.innerWidth >= 1280){
+    return (window.innerWidth - 1350) / 2;
+  }else{
+      return 10;
+  }
+};
 class App extends Component {
   toTop = (e) => {
     scroll.scrollTo(0);
   }
-  // topBtnPosition = () => {
-  //   if(window.innerWidth >= 1280){
-  //     return (window.innerWidth - 1350) / 2;
-  //   }else{
-  //       return 10;
-  //   }
-  // };
   render(){
-    const { pagename } = this.props;
-    console.log(topBtnPosition);
+    console.log(topBtnPosition());
     return (
     <Router>
       {/* reset css 추가 */}
       <Common/>
       <Header/>
       <TopBtn className="top" 
-        style={{right:topBtnPosition}}>
+        style={{right:topBtnPosition()}}>
         <button onClick={this.toTop}>TOP</button>
       </TopBtn>
       <Content>
@@ -42,12 +41,22 @@ class App extends Component {
         <Switch>
           {/* path - 특정위치에 도달하면 컴포넌트 보여줘라 */}
           <Route exact path="/" component={HomeContainer}/>
-          {/* <Redirect from="/now_playing" to="/now_playing/1"/>
-          <Redirect from="/popular" to="/popular/1"/>
-          <Redirect from="/upcoming" to="/upcoming/1"/> */}
-          <Route path="/now_playing/:page" component={HomeContainer} pagename={'now_playing'}/>
-          <Route path="/popular/:page" component={HomeContainer} pagename={'popular'}/>
-          <Route path="/upcoming/:page" component={HomeContainer} pagename={'upcoming'}/>
+{/* <Redirect from="/now_playing" to="/now_playing/1"/>
+<Redirect from="/popular" to="/popular/1"/>
+<Redirect from="/upcoming" to="/upcoming/1"/> */}
+          <Route path="/now_playing/:page" 
+            render={(props) => 
+            <PageContainer {...props} title="Now Playing"/>}
+          />
+          <Route path="/popular/:page" 
+            render={(props) => 
+            <PageContainer {...props} title="Popular"/>}
+          />
+          <Route path="/upcoming/:page" 
+            render={(props) => 
+            <PageContainer {...props} title="Up Coming"/>}
+          />
+          <Route path="/genres/:name" component={SeachGenreContainer}/>
           <Route path="/search" component={SearchContainer}/>
           {/* url 파라미터 넘겨주기 */}
           <Route path="/detail/:id" component={DetailContainer}/>
@@ -67,19 +76,22 @@ const Content = styled.div`
   margin:0 auto;
 `;
 const TopBtn = styled.div`
+  width:50px;
+  height:50px;
+  line-height:50px;
+  text-align:center;
+  border-radius:50%;
+  background:#030f03;
   position:fixed;
   bottom:50px;
   right:30px;
   z-index:999;
+  transition:all .5s ease-out;
+  :hover {background:#aaa;}
   button {
+    width:100%;
+    height:100%;
     color:#ffff;
   }
 `;
-const mapStateToProps = ({ INIT }) => ({
-  pagename : INIT.pagename
-});
-const mapDispatchToProps = { };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default App;
