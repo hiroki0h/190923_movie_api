@@ -74,6 +74,7 @@ const Common = createGlobalStyle`
     .blind {position:absolute; left:-99999px; top:-9999999px; font-size:1px;}
     .inner {max-width:1000px; margin:0 auto;}  
     body {color:#fff; background:#030f03;}
+    body.on {overflow:hidden;}
     h2, h2 a {font-size:30px; color:#fff;}
 `;
 

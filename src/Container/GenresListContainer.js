@@ -28,7 +28,7 @@ class GenresListContainer extends Component {
           <li key={index}>
     {/* !!!!! link를 통해 이렇게 값 넘긴다 !!!!! */}
             <Link to={{
-                  pathname : `/genres/${item.id}`,
+                  pathname : `/genres/${item.name}/1`,
                   state : {item:item}
                 }}
                 onClick={menuOpen}>

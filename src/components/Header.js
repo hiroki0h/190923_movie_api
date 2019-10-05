@@ -16,6 +16,11 @@ class Header extends Component {
   searchOpen = () => {
     this.props.searchOpen();
   }
+  // 컴포넌트가 prop 을 새로 받았을 때 실행
+  componentWillReceiveProps(nextProps) {
+    // body 클래스 주기
+    document.body.classList.toggle('on', nextProps.openMenu)
+  }
   render(){
     const { openMenu } = this.props;
     console.log('openMenu - '+openMenu);
@@ -28,10 +33,10 @@ class Header extends Component {
           type="button" 
           className="menu" 
           onClick={this.menuOpen}>
-            <span className={!openMenu ? "munu_icon openMenu" : "munu_icon"} ></span>
+            <span className={openMenu ? "munu_icon openMenu" : "munu_icon"}></span>
           Menu
         </Button>
-        { !openMenu && <Nav/> }
+        { openMenu && <Nav/> }
       </HeaderBoxInner>
     </HeaderBox>
     )

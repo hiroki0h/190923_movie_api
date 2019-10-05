@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux';
-import { menuOpen, searchOpen } from '../store/modules/INIT';
 import Dotdotdot from 'react-dotdotdot';
 import NoPoster from "../assets/images/noPoster.png";
+import PaginationContainer from '../Container/PaginationContainer';
 
 class List extends Component {
   render(){
-    const { title, openMenu, moviesResult } = this.props;
-    // console.log(moviesResult);
-    // console.log(pagename);
+    const { title, moviesResult, totalPages, current, category, pageNum } = this.props;
     return(
       <>
         <div>
@@ -36,16 +33,15 @@ class List extends Component {
                 </div>
               ))}
             </div>
+              <PaginationContainer
+                totalPages={totalPages}
+                current={current}
+                category={category}
+                pageNum={pageNum}
+              />
         </div>
       </>
     )
   }
 }
-const mapStateToProps = ({ INIT }) => ({
-  openMenu : INIT.openMenu
-});
-const mapDispatchToProps = { menuOpen, searchOpen };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(List);
+export default List;

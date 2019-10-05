@@ -42,7 +42,7 @@ class SearchContainer extends Component {
   }
   render(){
     const { isLoading, searchValue, searchResult, totalPages } = this.state;
-    const { match, current, location } =this.props;
+    const { match, current } =this.props;
     console.log(current);
     console.log(this.state.totalPages);
     return(

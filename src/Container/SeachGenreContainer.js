@@ -4,45 +4,48 @@ import { connect } from 'react-redux';
 import ListTheme from '../assets/ListTheme';
 import List from "../components/List";
 import Loader from '../components/Loader';
-import PaginationContainer from './PaginationContainer';
 
 class SeachGenreContainer extends Component { 
   state = {
     isLoading : false,
+    totalPages : 0,
     moviesResult : []
   }
-  aaa = async (genresId) => { 
-    const { data: { results : result }} =  await moviesApi.genresMovie(genresId);
+  getGenresMovie = async (current, genresId) => { 
+    const { data: { results : result, total_pages: pageLength } }  
+    =  await moviesApi.genresMovie(current, genresId);
     console.log(genresId);
     this.setState({
       isLoading : true,
+      totalPages : pageLength,
       moviesResult : [...result]
     });
   }
   componentDidMount(){
     const { location } = this.props;
     const genresId = location.state.item.id
-    this.aaa(genresId);
+    this.getGenresMovie(this.props.current, genresId);
   }
   render(){
-    const { location } =this.props;
-    const { isLoading, moviesResult } = this.state;
+    const { location, match } =this.props;
+    const ca = match.url.split('/')[2];
+    const category = match.url.split('/')[2];
+    const pageNum = Number(this.props.match.url.split('/')[3]);
+    const { isLoading, moviesResult, totalPages } = this.state;
+    console.log('totalPages'+totalPages);
     return(
       <>
       <ListTheme/>
         {!isLoading
           ? <Loader/>
-          :<>
-            <List
-                title={location.state.item.name}
-                moviesResult={moviesResult}
-              />
-              {/* <PaginationContainer
-                totalPages={totalPages}
-                current={current}
-                category={category}
-              /> */}
-          </>
+          :<List
+            title={location.state.item.name}
+            moviesResult={moviesResult}
+            totalPages={totalPages}
+            pageNum={pageNum}
+            // current={current}
+            category={category}
+          />
         }
       </>
     )

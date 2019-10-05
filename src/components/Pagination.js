@@ -2,26 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
-const Pagination = ({ getPageList, category, target, firstPage, prevPage, nextPage, lastPage }) => {
+const Pagination = ({ getPageList, pageNum, category, target, firstPage, totalPages }) => {
   return (
     <PaginationBox>
       <ul className="clearfix">
-        <li>
-          <Link to={`/${category}/${firstPage}`} onClick={getPageList} title="first page">&#60;&#60;</Link>
+        <li className={(pageNum === 1 ?"off":"")}>
+          <Link to={`/${category}/${firstPage}`}title="first page">&#60;&#60;</Link>
         </li>
-        <li>
-          <Link to={`/${category}/${firstPage}`} onClick={getPageList} title="prev page">&#60;</Link>
+        <li className={(pageNum-1 === 0 ?"off":"")}>
+          <Link to={`/${category}/${pageNum-1}`} onClick={getPageList} title="prev page">&#60;</Link>
         </li>
           {target.map(item => (
-            <li key={item}>
+            <li key={item} className={(pageNum === item ?"on":"")}>
               <Link to={`/${category}/${item}`} title={`${item} page`}>{item}</Link>
             </li>
           ))}
-        <li>
-          <Link to={`/${category}/${firstPage}`} onClick={getPageList} title="next page">&#62;</Link>
+          <li className={(pageNum === totalPages ?"off":"")}>
+          <Link to={`/${category}/${pageNum+1}`} onClick={getPageList} title="next page">&#62;</Link>
         </li>
-        <li>
-          <Link to={`/${category}/${lastPage}`} onClick={getPageList} title="last page">&#62;&#62;</Link>
+        <li className={(pageNum === totalPages ?"off":"")}>
+          <Link to={`/${category}/${totalPages}`} title="last page">&#62;&#62;</Link>
         </li>
       </ul>
     </PaginationBox>
@@ -38,8 +38,24 @@ ul {
   display:inline-block;
   li {
     float:left;
+    &.off{
+      a {
+        pointer-events:none;
+        cursor:default;
+        color:#aaa;
+      }
+    }
+    &.on{
+      a {
+      font-weight:bold;
+      font-size:24px;
+      }
+    }
     a {
+      transition: all .2s ease-out;
+      line-height:24px;
       padding:0 20px;
+      font-size:18px;
       color:#fff;
     }
   }

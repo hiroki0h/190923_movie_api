@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { menuOpen } from '../store/modules/INIT';
+import { menuOpen, genresOpen } from '../store/modules/INIT';
 import GenresListContainer from '../Container/GenresListContainer';
 
 class Nav extends Component {
@@ -10,7 +10,7 @@ class Nav extends Component {
     this.props.menuOpen();
   }
   genresListOpen = () => {
-    this.props.menuOpen();
+    this.props.genresOpen();
   }
   render(){
     const activeStyle = {
@@ -19,22 +19,27 @@ class Nav extends Component {
     };
     return(
       <NAV>
-        <ul className="depth1">
-          <li>
-        {/* 특정 NavLink 적용해라 -  activeStyle , exact : 정확히 매칭될때만 실행*/}
-            <NavLink exact to="/now_playing/1" activeStyle={activeStyle} onClick={this.menuOpen}>Now Playing</NavLink>
-          </li>
-          <li>
-            <NavLink to="/popular/1" activeStyle={activeStyle} onClick={this.menuOpen}>Popular</NavLink>
-          </li>
-          <li>
-            <NavLink to="/upcoming/1" activeStyle={activeStyle} onClick={this.menuOpen}>Up Coming</NavLink>
-          </li>
-          <li>
-            <button type="button" onClick={this.genresListOpen}>Genres</button>
-            <GenresListContainer menuOpen={this.menuOpen}/>
-          </li>
-        </ul>
+        <div className="nav">
+          <ul className="depth1">
+            <li>
+          {/* 특정 NavLink 적용해라 -  activeStyle , exact : 정확히 매칭될때만 실행*/}
+              <NavLink exact to="/now_playing/1" activeStyle={activeStyle} onClick={this.menuOpen}>Now Playing</NavLink>
+            </li>
+            <li>
+              <NavLink to="/popular/1" activeStyle={activeStyle} onClick={this.menuOpen}>Popular</NavLink>
+            </li>
+            <li>
+              <NavLink to="/upcoming/1" activeStyle={activeStyle} onClick={this.menuOpen}>Up Coming</NavLink>
+            </li>
+            <li>
+              <button type="button" onClick={this.genresListOpen}>Genres</button>
+              {this.props.accordion
+                ? <GenresListContainer menuOpen={this.menuOpen}/>
+                : ""
+              }
+            </li>
+          </ul>
+        </div>
       </NAV>
     )
   }
@@ -42,13 +47,20 @@ class Nav extends Component {
 const NAV = styled.nav`
   width:100%;
   height:100%;  
+  overflow-y:auto;
   background:#030f03;
   position:fixed;
   left:0;
   z-index:9;
+  .nav {
+  width:100%;
+  height:100%;
+  position:absolute;
+  }
   .depth1 {
     width:50%;
     padding-top:50px;
+    margin-bottom:50px;
     transform:translateX(-50%);
     position:absolute;
     top:0;
@@ -91,7 +103,7 @@ const NAV = styled.nav`
   .depth2 {
     padding-top:20px;
     li {
-      width:20%;
+      width:25%;
       float:left;
       a {
         
@@ -103,9 +115,10 @@ const NAV = styled.nav`
   }
 `;
 const mapStateToProps = ({ INIT }) => ({
-  openMenu : INIT.openMenu
+  openMenu : INIT.openMenu,
+  accordion : INIT.accordion
 });
-const mapDispatchToProps = { menuOpen };
+const mapDispatchToProps = { menuOpen, genresOpen };
 export default connect(
   mapStateToProps,
   mapDispatchToProps

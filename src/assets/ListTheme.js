@@ -24,13 +24,26 @@ const ListTheme = createGlobalStyle`
       color:#fff;
       position:relative;
       display:block;
-    }
-    .img_box {
       height:0;
       overflow:hidden;
       padding-bottom:150%;
+    }
+  }
+  &.similar {
+    .movies_list ,li {
+      a {
+        padding-bottom:83%;
+      } 
+    } 
+    /* .text_box {display:none;} */
+  }
+    .img_box {
+      width:100%;
+      height:100%; 
       text-align:center;
-      position:relative;
+      position:absolute;
+      top:0; 
+      left:0;
       ::before {
         content:""; 
         width:100%;
@@ -71,8 +84,8 @@ const ListTheme = createGlobalStyle`
         color:#ddd;
       }
     }
-  }
 }
+
 @media (max-width:960px ){
   ul.list {
     li {

@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import ListTheme from '../assets/ListTheme';
 import Loader from '../components/Loader';
 import List from '../components/List';
-import PaginationContainer from './PaginationContainer';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import { currentPage, makeLastPage, startEndPage } from '../store/modules/INIT';
 
 class PageContainer extends Component { 
   state = {
@@ -45,31 +44,33 @@ class PageContainer extends Component {
     const { isLoading, moviesResult, totalPages } = this.state;
     const { title, current, match } = this.props;
     const category = match.url.split('/')[1];
+    const pageNum = Number(this.props.match.url.split('/')[2]);
     return(
       <>
         <ListTheme/>
         {!isLoading
           ? <Loader/>
-          :<>
-              <List
-                title={title}
-                moviesResult={moviesResult}
-              />
-              <PaginationContainer
-                totalPages={totalPages}
-                current={current}
-                category={category}
-              />
-            </>
+          :<List
+              title={title}
+              moviesResult={moviesResult}
+              totalPages={totalPages}
+              current={current}
+              category={category}
+              pageNum={pageNum}
+            />
         }
       </>
     )
   }
 }
 const mapStateToProps = ({ INIT }) => ({
-  current : INIT.current
+  current : INIT.current,
+  firstPage : INIT.firstPage,
+  lastPage : INIT.lastPage,
+  start : INIT.start,
+  end : INIT.end
 });
-const mapDispatchToProps = { };
+const mapDispatchToProps = { currentPage, makeLastPage, startEndPage };
 export default connect(
   mapStateToProps,
   mapDispatchToProps

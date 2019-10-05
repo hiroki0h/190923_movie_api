@@ -6,14 +6,19 @@ import Dotdotdot from 'react-dotdotdot';
 import styled from 'styled-components';
 import Slider from 'react-slick';
 import NoPoster from "../assets/images/noPoster.png";
+import { animateScroll as scroll } from 'react-scroll'
 
-class Home extends Component {
+class SlideList extends Component {
   selectThisPage = () => {
     const { pagename, name } = this.props;
     pagename(name);
   }
+  toTop = (e) => {
+    // scroll.scrollTo(0);
+  }
   render(){
-    const { name, title, selectName } = this.props;
+    const { name, title, selectName, pageName, similar } = this.props;
+    console.log('this page - '+pageName);
     const settings = {
       className: "center",
       centerMode: true,
@@ -22,15 +27,21 @@ class Home extends Component {
       slidesToShow: 3,
       speed: 500
     };
+    // const { match } = this.props;
+    // const category = match.url.split('/')[1];
+    // console.log('this category - '+category);
     return(
       <>
       <MovieBox>
-        <h2><Link to={`/${name}/1`} onClick={this.selectThisPage}>{title}</Link></h2>
-        <SliderList className="list clearfix">
+        {similar !== "similar"
+          ? <h2><Link to={`/${name}/1`} onClick={this.selectThisPage}>{title}</Link></h2>
+          : <h3>Similar Movies</h3>
+        }
+        <SliderList className={similar !== "similar" ? "list clearfix" : "list clearfix similar"}>
           <Slider {...settings}>
               {selectName.map(item => (
                 <div key={item.id} className="movies_list">
-                  <Link to={`detail/${item.id}`}>
+                  <Link to={`/detail/${item.id}`} onClick={this.toTop}>
                     <div className="img_box">
                       {item.poster_path === null
                         ?<img src={NoPoster} alt="" className="no_poster"/>
@@ -38,12 +49,20 @@ class Home extends Component {
                       }
                     </div>
                     <div className="text_box">
-                      <Dotdotdot clamp={3}>
-                          <p className="title">{item.title}</p>
-                      </Dotdotdot>
-                      <Dotdotdot clamp={6}>
-                          <p className="overview">{item.overview}</p>
-                      </Dotdotdot>
+                      {similar !== "similar"
+                        ? <>
+                            <Dotdotdot clamp={3}>
+                                <p className="title">{item.title}</p>
+                            </Dotdotdot>
+                            <Dotdotdot clamp={6}>
+                                <p className="overview">{item.overview}</p>
+                            </Dotdotdot>
+                          </>
+                        :
+                          <Dotdotdot clamp={3}>
+                              <p className="title">{item.title}</p>
+                          </Dotdotdot>
+                      }
                     </div>
                   </Link>
                 </div>
@@ -77,10 +96,11 @@ const SliderList = styled.div`
   .slick-next {right:0;}
 `;
 const mapStateToProps = ({ INIT }) => ({
-  openMenu : INIT.openMenu
+  openMenu : INIT.openMenu,
+  pageName : INIT.pageName
 });
 const mapDispatchToProps = { pagename };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Home);
+)(SlideList);

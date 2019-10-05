@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import ListBg from "../assets/images/list_bg_H.png";
-import MainBtnTheme from "../components/MainBtnTheme";
+import MainBtnTheme from "./MainBtnTheme";
+import SimilarContainer from "../Container/SimilarContainer";
 import Loader from './Loader';
 import Dotdotdot from 'react-dotdotdot';
 import Rating from "../assets/images/rating.png";
@@ -10,14 +12,14 @@ import NoPoster from "../assets/images/noPoster.png";
 class Detail extends Component { 
   render(){
     const { isLoading, result, history } = this.props;
-    console.log('vote - '+result.vote_average);
+    // console.log('vote - '+result.vote_average);
     return(
       <>
       {!isLoading
         ? <Loader/>
         :
-        <>
-          <DetailBox>
+        <DetailBox>
+          <div className="detail_box">
             <div className="img_box">
               {result.poster_path !== null
                 ?
@@ -56,8 +58,16 @@ class Detail extends Component {
                   {result.genres &&
                     result.genres.map((genre, index) =>
                       index === result.genres.length - 1
-                        ? `#${genre.name}   `
-                        : `#${genre.name}   `
+                      ? 
+                        <Link key={index} to={{
+                          pathname : `/genres/${genre.name}`,
+                          state : {item:genre}
+                          }}>#{genre.name}    </Link>
+                      :
+                        <Link key={index} to={{
+                          pathname : `/genres/${genre.name}`,
+                          state : {item:genre}
+                          }}>#{genre.name}    </Link>
                   )}
                 </p>
                 <p className="overview">{result.overview}</p>
@@ -85,20 +95,28 @@ class Detail extends Component {
                 </div>
               </div>
             </div>
-          </DetailBox>
+          </div>
+          {/* similar */}
+          <div className="similar_box clearfix">
+            <SimilarContainer movieId={result.id} title='detail'/>
+          </div>
           {/* 버튼이 클릭되면 main 페이지를 불러달라 */}
             <MainBtnTheme history={history}/>
-        </>
+        </DetailBox>
       }
       </>
     )
   }
 }
 const DetailBox = styled.div`
+.detail_box{
   width:100%;
   height:0;
   padding-bottom:90%;
   position:relative;
+  p {font-size:20px;}
+  h3 {font-size:20px;}
+}
 .img_box {
   width:55%;
   position:absolute;
@@ -141,7 +159,6 @@ const DetailBox = styled.div`
     padding-right:10px;
     vertical-align:middle;
     display:table-cell;
-    p {font-size:20px;}
     .title {font-size:30px;}
     .org_title {color:#555;}
     .info {
@@ -173,28 +190,33 @@ const DetailBox = styled.div`
         }
       }
     }
-    .genres {padding-top:20px;}
+    .genres {
+      padding-top:20px;
+      a {color:#fff;}
+    }
     .release {}
-      .video_box {
-        padding-top:50px; 
-        h3 {font-size:20px;}
-        .video {
-          max-width:310px;
-          padding-top:10px;
-          margin-right:20px;
-          margin-bottom:20px;
-          float:left;
-          p {padding-bottom:10px;}
-          iframe {box-shadow:5px 5px 10px #545454;}
-        }
+    .video_box {
+      padding-top:50px; 
+      .video {
+        max-width:310px;
+        padding-top:10px;
+        margin-right:20px;
+        margin-bottom:20px;
+        float:left;
+        p {padding-bottom:10px;}
+        iframe {box-shadow:5px 5px 10px #545454;}
+      }
   }
 }
 @media (max-width:1170px ){
   .video_box {display:none;}
 }
 @media (max-width:768px ){
-  height:auto;
-  padding-bottom:0%;
+  .detail_box {
+    height:auto;
+    position:static;
+    padding-bottom:0;
+  }
   .img_box {
     position:static;
     margin:0 auto;

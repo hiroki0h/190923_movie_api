@@ -8,7 +8,7 @@ const api = axios.create({ // api 값 받기
   }
 });
 export const moviesApi = {
-  movieList : (page, pagename) => api.get(`movie/${pagename}`,{
+  movieList : (page, pageName) => api.get(`movie/${pageName}`,{
     params : {page : page}
   }),
   nowPlaying : (page) => {
@@ -30,23 +30,22 @@ export const moviesApi = {
   movieDetail : id =>
     api.get(`movie/${id}`, {
       params : {
-        append_to_response: 'videos'
+        append_to_response : 'videos'
       }
     }),
   search : (term,page) =>
     api.get('search/movie', {
       params : {
         query : encodeURIComponent(term),
-        page: page
+        page : page
       }
     }),
-  genresList : () => api.get('genre/movie/list',{
-  }),
-  genresMovie : (genresId) => api.get(`discover/movie/`,{
+  genresList : () => api.get('genre/movie/list'),
+  genresMovie : (page, genresId) => api.get(`discover/movie/`,{
     params : {
-      with_genres : encodeURIComponent(genresId)
+      with_genres : encodeURIComponent(genresId),
+      page : page
     }
   }),
+  similarMovie : (movieId) => api.get(`movie/${movieId}/similar`),
 };
-// https://api.themoviedb.org/3/discover/movie?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&  with_genres=16
-// https://api.themoviedb.org/3/search/movie?api_key=10923b261ba94d897ac6b81148314a3f&language=en-US&    query=asd

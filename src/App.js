@@ -56,8 +56,9 @@ class App extends Component {
             render={(props) => 
             <PageContainer {...props} title="Up Coming"/>}
           />
-          <Route path="/genres/:name" component={SeachGenreContainer}/>
+          <Route path="/genres/:name/:page" component={SeachGenreContainer}/>
           <Route path="/search" component={SearchContainer}/>
+          <Route path="/search/:name/:page" component={SearchContainer}/>
           {/* url 파라미터 넘겨주기 */}
           <Route path="/detail/:id" component={DetailContainer}/>
           {/* Switch가 써지면 매칭하고 나머지는 비교하지 않아 */}

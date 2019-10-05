@@ -8,7 +8,7 @@ import List from '../components/List';
 
 class ListContainer extends Component {
   render(){
-    const { pagename, openMenu, nowPlaying, moviesResult, showUp } = this.props;
+    const { pageName, openMenu, nowPlaying, moviesResult, showUp } = this.props;
     const settings = {
       className: "center",
       centerMode: true,
@@ -18,15 +18,15 @@ class ListContainer extends Component {
       speed: 500
     };
     console.log(openMenu);
-    console.log('pagename - '+pagename);
+    console.log('pageName - '+pageName);
     return(
       <>
-        {pagename === 'home'
+        {pageName === 'home'
         ?
         <>
           {showUp.map((list, index) => (
             <div key={index}>
-              <h2><Link to="/">{pagename}</Link></h2>
+              <h2><Link to="/">{pageName}</Link></h2>
               <SliderList className="list clearfix">
                 <Slider {...settings}>
                   <List
@@ -38,7 +38,7 @@ class ListContainer extends Component {
         </>
         :
           <div>
-            <h2><Link to={`/${pagename}`}>{pagename}</Link></h2>
+            <h2><Link to={`/${pageName}`}>{pageName}</Link></h2>
             <SliderList className="list clearfix">
               <List/>
             </SliderList>
@@ -52,7 +52,7 @@ const SliderList = styled.div`
 button {color:#fff;}
 `;
 const mapStateToProps = ({ INIT }) => ({
-  pagename : INIT.pagename,
+  pageName : INIT.pageName,
   openMenu : INIT.openMenu
 });
 const mapDispatchToProps = { menuOpen, searchOpen };

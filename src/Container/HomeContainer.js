@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { moviesApi } from '../Api';
 import ListTheme from '../assets/ListTheme';
 import Loader from '../components/Loader';
-import Home from '../components/Home';
+import SlideList from '../components/SlideList';
 
 class HomeContainer extends Component { 
   state = {
@@ -40,9 +40,9 @@ class HomeContainer extends Component {
         {!isLoading
           ? <Loader/>
           : <>
-              <Home selectName={nowPlaying} name={'now_playing'} title={'Now Playing'}/>
-              <Home selectName={popular} name={'popular'} title={'Popular'}/>
-              <Home selectName={upcoming} name={'upcoming'} title={'Up Coming'}/>
+              <SlideList selectName={nowPlaying} name={'now_playing'} title={'Now Playing'}/>
+              <SlideList selectName={popular} name={'popular'} title={'Popular'}/>
+              <SlideList selectName={upcoming} name={'upcoming'} title={'Up Coming'}/>
             </>
         }
       </>

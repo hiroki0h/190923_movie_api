@@ -5,7 +5,7 @@ import Detail from '../components/Detail';
 class DetailContainer extends Component { 
   state = {
     isLoading : false,
-    result : {}
+    result : {},
   }
   getMovies = async (movieID) => { 
     const result = await moviesApi.movieDetail(movieID);
@@ -13,16 +13,21 @@ class DetailContainer extends Component {
       result : result.data,
       isLoading : true
     });
-    console.log(result);
-    console.log(result.data.id);
+    // console.log(result);
+    // console.log(result.data.id);
   }
   componentDidMount(){
     const { match } = this.props;
     const movieID = Number(match.params.id);
     this.getMovies(movieID);
-    // console.log(match);
-    // console.log(movieID);
-    // console.log(typeof movieID);
+  }
+  // 업데이트 되었을때!!!
+  componentDidUpdate(prevProps, prevState) {
+    const { match } = this.props;
+    const movieID = Number(match.params.id);
+    if(prevProps !== movieID){
+      this.getMovies(movieID);
+    }
   }
   render(){
     const { history } = this.props;
@@ -33,10 +38,6 @@ class DetailContainer extends Component {
         result={result}
         history={history}
       />
-      // <PaginationContainer
-      //   isLoading={isLoading}
-      //   moviesResult={moviesResult}
-      // />
     )
   }
 }
