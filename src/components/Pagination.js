@@ -2,26 +2,41 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom'
 
-const Pagination = ({ getPageList, pageNum, category, target, firstPage, totalPages }) => {
+const Pagination = ({asd, getPageList, pageNum, category, target, firstPage, totalPages }) => {
   return (
     <PaginationBox>
       <ul className="clearfix">
         <li className={(pageNum === 1 ?"off":"")}>
-          <Link to={`/${category}/${firstPage}`}title="first page">&#60;&#60;</Link>
+          {asd === ""  // asd??
+            ? <Link to={`/${category}/${firstPage}`}title="first page">&#60;&#60;</Link>
+            : <Link to={`/${asd}/${category}/${firstPage}`}title="first page">&#60;&#60;</Link>
+          }
         </li>
         <li className={(pageNum-1 === 0 ?"off":"")}>
-          <Link to={`/${category}/${pageNum-1}`} onClick={getPageList} title="prev page">&#60;</Link>
+          {asd === ""
+            ? <Link to={`/${category}/${pageNum-1}`} onClick={getPageList} title="prev page">&#60;</Link>
+            : <Link to={`/genres/${category}/${pageNum-1}`} onClick={getPageList} title="prev page">&#60;</Link>
+          }
         </li>
           {target.map(item => (
             <li key={item} className={(pageNum === item ?"on":"")}>
-              <Link to={`/${category}/${item}`} title={`${item} page`}>{item}</Link>
+            {asd === ""
+                ? <Link to={`/${category}/${item}`} onClick={getPageList} title={`${item} page`}>{item}</Link>
+                : <Link to={`/genres/${category}/${item}`} onClick={getPageList} title={`${item} page`}>{item}</Link>
+              }
             </li>
           ))}
           <li className={(pageNum === totalPages ?"off":"")}>
-          <Link to={`/${category}/${pageNum+1}`} onClick={getPageList} title="next page">&#62;</Link>
+          {asd === ""
+              ? <Link to={`/${category}/${pageNum+1}`} onClick={getPageList} title="next page">&#62;</Link>
+              : <Link to={`/genres/${category}/${pageNum+1}`} onClick={getPageList} title="next page">&#62;</Link>
+            }
         </li>
         <li className={(pageNum === totalPages ?"off":"")}>
-          <Link to={`/${category}/${totalPages}`} title="last page">&#62;&#62;</Link>
+          {asd === ""
+            ? <Link to={`/${category}/${totalPages}`} title="last page">&#62;&#62;</Link>
+            : <Link to={`/genres/${category}/${totalPages}`} title="last page">&#62;&#62;</Link>
+          }
         </li>
       </ul>
     </PaginationBox>

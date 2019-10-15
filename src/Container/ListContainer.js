@@ -17,8 +17,8 @@ class ListContainer extends Component {
       slidesToShow: 3,
       speed: 500
     };
-    console.log(openMenu);
-    console.log('pageName - '+pageName);
+    // console.log(openMenu);
+    // console.log('pageName - '+pageName);
     return(
       <>
         {pageName === 'home'

@@ -60,12 +60,12 @@ class Detail extends Component {
                       index === result.genres.length - 1
                       ? 
                         <Link key={index} to={{
-                          pathname : `/genres/${genre.name}`,
+                          pathname : `/genres/${genre.name}/1`,
                           state : {item:genre}
                           }}>#{genre.name}    </Link>
                       :
                         <Link key={index} to={{
-                          pathname : `/genres/${genre.name}`,
+                          pathname : `/genres/${genre.name}/1`,
                           state : {item:genre}
                           }}>#{genre.name}    </Link>
                   )}

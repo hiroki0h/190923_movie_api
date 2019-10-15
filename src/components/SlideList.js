@@ -18,7 +18,7 @@ class SlideList extends Component {
   }
   render(){
     const { name, title, selectName, pageName, similar } = this.props;
-    console.log('this page - '+pageName);
+    // console.log('this page - '+pageName);
     const settings = {
       className: "center",
       centerMode: true,
@@ -77,6 +77,7 @@ class SlideList extends Component {
 const MovieBox = styled.div`
   padding-top:30px;
   :first-child {padding-top:0;}
+  h3 {font-size:20px;}
 `;
 const SliderList = styled.div`
   margin-right:0;

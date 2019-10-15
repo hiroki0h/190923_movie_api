@@ -6,7 +6,7 @@ import PaginationContainer from '../Container/PaginationContainer';
 
 class List extends Component {
   render(){
-    const { title, moviesResult, totalPages, current, category, pageNum } = this.props;
+    const { asd, title, moviesResult, totalPages, current, category, pageNum } = this.props;
     return(
       <>
         <div>
@@ -38,6 +38,7 @@ class List extends Component {
                 current={current}
                 category={category}
                 pageNum={pageNum}
+                asd={asd}
               />
         </div>
       </>

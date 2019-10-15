@@ -32,7 +32,7 @@ class SearchContainer extends Component {
       totalPages : pageLength,
       isLoading: false 
     });
-    console.log(searchResult);
+    // console.log(searchResult);
   }
   // 업데이트 되었을때!!!
   componentDidUpdate(prevProps, prevState) {
@@ -43,8 +43,8 @@ class SearchContainer extends Component {
   render(){
     const { isLoading, searchValue, searchResult, totalPages } = this.state;
     const { match, current } =this.props;
-    console.log(current);
-    console.log(this.state.totalPages);
+    // console.log(current);
+    // console.log(this.state.totalPages);
     return(
       <>
         <Search 

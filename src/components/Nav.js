@@ -38,6 +38,13 @@ class Nav extends Component {
                 : ""
               }
             </li>
+            <li>
+              <button type="button" onClick={this.genresListOpen}>Language</button>
+              {this.props.accordion
+                ? <GenresListContainer menuOpen={this.menuOpen}/>
+                : ""
+              }
+            </li>
           </ul>
         </div>
       </NAV>

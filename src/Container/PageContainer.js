@@ -43,6 +43,7 @@ class PageContainer extends Component {
   render(){
     const { isLoading, moviesResult, totalPages } = this.state;
     const { title, current, match } = this.props;
+    const asd = match.url.split('/')[0];
     const category = match.url.split('/')[1];
     const pageNum = Number(this.props.match.url.split('/')[2]);
     return(
@@ -57,6 +58,7 @@ class PageContainer extends Component {
               current={current}
               category={category}
               pageNum={pageNum}
+              asd={asd}
             />
         }
       </>

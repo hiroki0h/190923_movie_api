@@ -9,34 +9,31 @@ class PaginationContainer extends Component {
     this.getPageList();
   }
   getPageList = () => {
-    const { startEndPage, totalPages, start, end, pageNum } = this.props;
-
+    const { startEndPage, totalPages, pageNum } = this.props;
     const pageArray = [];
     for (let i = 0; i < totalPages; i++){
       pageArray.push(i + 1);
     }
-    startEndPage((pageNum-1),(pageNum+5));
-    console.log(start, end);
-    const target = pageArray.slice(start, end);
+    if(pageNum === 1){
+      startEndPage((0),(5));
+    }else if(pageNum > 3 ){
+      startEndPage((pageNum-3),(pageNum+2));
+      if(pageNum >= (totalPages-2)){
+        startEndPage((totalPages-5), (totalPages+1));
+      }
+    }
   }
   // 업데이트 되었을때!!!
   componentDidUpdate(prevProps, prevState) {
-    console.log('prevProps - '+prevProps);
     this.getPageList();
   }
-  componentDidMount(){
-
-  }
   render(){
-    const { totalPages, start, end, category, firstPage, pageNum } = this.props;
+    const { asd, totalPages, start, end, category, firstPage, pageNum } = this.props;
     const pageArray = [];
     for (let i = 0; i < totalPages; i++){
       pageArray.push(i + 1);
     }
     const target = pageArray.slice(start, end);
-    console.log('totalPages - '+totalPages);
-    console.log('target - '+target);
-    console.log('pageNum - '+pageNum);
     return(
       <Pagination
         target={target}
@@ -45,6 +42,7 @@ class PaginationContainer extends Component {
         firstPage={firstPage}
         totalPages={totalPages}
         getPageList={this.getPageList}
+        asd={asd}
       />
     )
   }

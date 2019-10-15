@@ -5,6 +5,7 @@ const api = axios.create({ // api 값 받기
   params : {
     api_key : '10923b261ba94d897ac6b81148314a3f',
     language : 'en-US'
+    // language : 'ko-KR'
   }
 });
 export const moviesApi = {
@@ -12,7 +13,7 @@ export const moviesApi = {
     params : {page : page}
   }),
   nowPlaying : (page) => {
-    console.log('page - '+page);
+    // console.log('page - '+page);
       return(
         api.get('movie/now_playing',{
           params : {page : page}
@@ -43,7 +44,7 @@ export const moviesApi = {
   genresList : () => api.get('genre/movie/list'),
   genresMovie : (page, genresId) => api.get(`discover/movie/`,{
     params : {
-      with_genres : encodeURIComponent(genresId),
+      with_genres : genresId,
       page : page
     }
   }),

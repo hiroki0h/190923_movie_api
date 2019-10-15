@@ -26,7 +26,7 @@ class App extends Component {
     scroll.scrollTo(0);
   }
   render(){
-    console.log(topBtnPosition());
+    // console.log(topBtnPosition());
     return (
     <Router>
       {/* reset css 추가 */}

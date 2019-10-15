@@ -16,7 +16,7 @@ class SimilarContainer extends Component {
       isLoading : true,
       moviesResult : [...moviesResult]
     });
-    console.log(moviesResult);
+    // console.log(moviesResult);
   }
   componentDidMount(){
     this.similarMovie(this.props.movieId);

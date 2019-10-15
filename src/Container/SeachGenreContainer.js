@@ -11,10 +11,10 @@ class SeachGenreContainer extends Component {
     totalPages : 0,
     moviesResult : []
   }
-  getGenresMovie = async (current, genresId) => { 
+  getGenresMovie = async (pageNum, genresId) => { 
     const { data: { results : result, total_pages: pageLength } }  
-    =  await moviesApi.genresMovie(current, genresId);
-    console.log(genresId);
+    =  await moviesApi.genresMovie(pageNum, genresId);
+    // console.log(genresId);
     this.setState({
       isLoading : true,
       totalPages : pageLength,
@@ -22,17 +22,30 @@ class SeachGenreContainer extends Component {
     });
   }
   componentDidMount(){
-    const { location } = this.props;
-    const genresId = location.state.item.id
-    this.getGenresMovie(this.props.current, genresId);
+    // const { location } = this.props;
+    // const genresId = location.state.item.id
+    // this.getGenresMovie(this.props.current, genresId);
+
+
+
+    
+    const { location } =this.props;
+    const pageNum = this.props.match.url.split('/')[3];
+    console.log(pageNum);
+    const genresId = location.state.item.id;
+    this.getGenresMovie(pageNum, genresId);
+
+
+
   }
   render(){
     const { location, match } =this.props;
-    const ca = match.url.split('/')[2];
+    const asd = match.url.split('/')[1];
     const category = match.url.split('/')[2];
     const pageNum = Number(this.props.match.url.split('/')[3]);
     const { isLoading, moviesResult, totalPages } = this.state;
-    console.log('totalPages'+totalPages);
+    console.log('asd --- '+asd);
+    console.log('pageNum --- '+pageNum);
     return(
       <>
       <ListTheme/>
@@ -45,6 +58,7 @@ class SeachGenreContainer extends Component {
             pageNum={pageNum}
             // current={current}
             category={category}
+            asd={asd}
           />
         }
       </>
@@ -59,3 +73,5 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SeachGenreContainer);
+
+https://www.themoviedb.org/talk/5d6834a19f0e19001442ed7b

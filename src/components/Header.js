@@ -23,7 +23,7 @@ class Header extends Component {
   }
   render(){
     const { openMenu } = this.props;
-    console.log('openMenu - '+openMenu);
+    // console.log('openMenu - '+openMenu);
     return(
     <HeaderBox >
       <HeaderBoxInner>

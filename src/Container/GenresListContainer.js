@@ -21,7 +21,7 @@ class GenresListContainer extends Component {
   render(){
     const { genresList } = this.state;
     const { menuOpen } = this.props;
-    console.log(genresList);
+    // console.log(genresList);
     return(
       <ul className="depth2 clearfix">
         {genresList.map((item, index) =>
