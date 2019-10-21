@@ -6,13 +6,11 @@ const PAGE_NAME = 'PAGE_NAME';
 const SEARCH_OPEN = 'SEARCH_OPEN';
 const CURRENT_PAGE = 'CURRENT_PAGE';
 const START_END_PAGE = 'START_END_PAGE';
-const GENRE_MENU_OPEN = 'GENRE_MENU_OPEN';
 const LAST_PAGE = 'LAST_PAGE';
 
 // 생성함수 정의
 export const menuOpen = createAction(MENU_OPEN, openMenu => openMenu);
 export const searchOpen = createAction(SEARCH_OPEN, openMenu => openMenu);
-export const genresOpen = createAction(GENRE_MENU_OPEN, accordion => accordion);
 export const resize = createAction(RESIZE);
 export const pagename = createAction(PAGE_NAME, pageName => pageName);
 export const currentPage = createAction(CURRENT_PAGE, num => num);
@@ -27,8 +25,7 @@ const initalState = {
     lastPage: 0,
     start: 0,
     end: 5, // Pagination 관련
-    openMenu : false,
-    accordion : false,
+    openMenu : true,
     pageName : '',
     screenWidth : 0,
     screenHeight : 0
@@ -43,10 +40,6 @@ export default handleActions(
             ...state,
             openMenu : ! state.openMenu,
             accordion : state.accordion === true && false
-        }),
-        [GENRE_MENU_OPEN] : (state, action) => ({
-            ...state,
-            accordion : ! state.accordion
         }),
         [SEARCH_OPEN] : (state, action) => ({
             ...state,

@@ -73,5 +73,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(SeachGenreContainer);
-
-https://www.themoviedb.org/talk/5d6834a19f0e19001442ed7b

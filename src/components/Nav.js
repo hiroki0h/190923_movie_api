@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { menuOpen, genresOpen } from '../store/modules/INIT';
+import { menuOpen } from '../store/modules/INIT';
 import GenresListContainer from '../Container/GenresListContainer';
 
 class Nav extends Component {
-  menuOpen = (id) => {
+  constructor(props) {
+    super(props);
+    this.divRef = React.createRef()
+  }
+  menuOpen = () => {
     this.props.menuOpen();
   }
-  genresListOpen = () => {
-    this.props.genresOpen();
+  accordionOpen = (e) => {
+    this.divRef.current.firstChild.classList.remove('on');
+    var list = this.divRef.current.childNodes;
+    list.forEach(function(node, idx) {
+      list[idx].classList.remove('on');
+    });
+    e.currentTarget.parentElement.classList.add('on'); 
+
   }
   render(){
     const activeStyle = {
@@ -20,7 +30,7 @@ class Nav extends Component {
     return(
       <NAV>
         <div className="nav">
-          <ul className="depth1">
+          <ul className="depth1" ref={this.divRef}>
             <li>
           {/* 특정 NavLink 적용해라 -  activeStyle , exact : 정확히 매칭될때만 실행*/}
               <NavLink exact to="/now_playing/1" activeStyle={activeStyle} onClick={this.menuOpen}>Now Playing</NavLink>
@@ -32,18 +42,12 @@ class Nav extends Component {
               <NavLink to="/upcoming/1" activeStyle={activeStyle} onClick={this.menuOpen}>Up Coming</NavLink>
             </li>
             <li>
-              <button type="button" onClick={this.genresListOpen}>Genres</button>
-              {this.props.accordion
-                ? <GenresListContainer menuOpen={this.menuOpen}/>
-                : ""
-              }
+              <button type="button" onClick={(e) => {this.accordionOpen(e)}}>Genres</button>
+              <div><GenresListContainer menuOpen={this.menuOpen}/></div>
             </li>
             <li>
-              <button type="button" onClick={this.genresListOpen}>Language</button>
-              {this.props.accordion
-                ? <GenresListContainer menuOpen={this.menuOpen}/>
-                : ""
-              }
+              <button type="button" onClick={(e) => {this.accordionOpen(e)}}>Language</button>
+              <div><GenresListContainer menuOpen={this.menuOpen}/></div>
             </li>
           </ul>
         </div>
@@ -72,6 +76,8 @@ const NAV = styled.nav`
     position:absolute;
     top:0;
     left:50%;
+    div {display:none}
+    .on div{ display:block;}
      li {
       margin-bottom:20px;
       text-align:center;
@@ -122,13 +128,10 @@ const NAV = styled.nav`
   }
 `;
 const mapStateToProps = ({ INIT }) => ({
-  openMenu : INIT.openMenu,
-  accordion : INIT.accordion
+  openMenu : INIT.openMenu
 });
-const mapDispatchToProps = { menuOpen, genresOpen };
+const mapDispatchToProps = { menuOpen };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Nav);
-// https://reactjsexample.com/tag/scroll/
-// https://reactjsexample.com/scroll-to-a-position-in-react/
